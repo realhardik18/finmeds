@@ -116,65 +116,121 @@
     font-weight: 900;
     font-style: italic;
     }
+    .background{
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .damn{
+        place-items: center;
+    }
   </style>
 </head>
-<body class="bg-black text-white flex justify-center h-screen ">
-  <div class="w-screen block h-12 bg-black">
-    <div class="navbar bg-black border-white border-b-2 w-screen">
-        <div class="navbar-start w-48">
-          <div class="dropdown">
-            <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-                <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h8m-8 6h16" />
-              </svg>
+<body class="bg-black text-white flex justify-center h-screen bg-animated background " background="wave-haikei (6).svg">
+    <div class="w-screen block h-12 bg-black">
+        <div class="navbar bg-black border-white border-b-2 w-screen">
+            <div class="navbar-start w-48">
+              <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                    <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 6h16M4 12h8m-8 6h16" />
+                  </svg>
+                </div>
+                <ul
+                  tabindex="0"
+                  class="menu menu-sm dropdown-content bg-black rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                  <li><a href="/hospitals.html">Hospitals</a></li>
+                  <li><a href="/policy.html">Policy Reader</a></li>
+                  <li><a href="/ngo.html">NGOs</a></li>
+                  <li><a href="/stories.html">Stories that made us</a></li>
+                  <li><a href="/about.html">About Us</a></li>
+                  <li><a href="vaccinations.html">Vaccinations</a></li>
+                </ul>
+              </div>
+              <a class="btn btn-ghost text-xl poppins-bold" href="index.html"><img class="h-10" src="logo black bg.png" alt="logo">FinMeds</a>
             </div>
-            <ul
-              tabindex="0"
-              class="menu menu-sm dropdown-content bg-black rounded-box z-[1] mt-3 w-52 p-2 shadow">
-              <li><a href="/hospitals.html">Hospitals</a></li>
-              <li><a href="/email.htm">Email Filter</a></li>
-              <li><a href="/ngo.html">NGOs</a></li>
-              <li><a href="/stories.html">Stories that made us</a></li>
-              <li><a href="/about.html">About Us</a></li>
-            </ul>
+            <div class="navbar-center hidden lg:flex">
+              <ul class="menu menu-horizontal px-1">
+                <li><a href="/hospitals.html">Hospitals</a></li>
+                <li><a href="/policy.html">Policy Reader</a></li>
+                <li><a href="/ngo.html">NGOs</a></li>
+                <li><a href="/stories.html">Stories that made us</a></li>
+                <li><a href="vaccinations.html">Vaccinations</a></li>
+              </ul>
+            </div>
+            <div class="navbar-end">
+            <a class="pr-8" href="/about.html">About Us</a>
+              <a class="btn">हिंदी</a>
+            </div>
           </div>
-          <a class="btn btn-ghost text-xl poppins-bold" href="index.html"><img class="h-10" src="logo black bg.png" alt="logo">FinMeds</a>
+      <h1 class="poppins-bold text-5xl w-fit mt-10 mx-auto">WHAT IT DOES</h1>
+      <div class="flex justify-center items-center h-80">
+        <div class="w-1/2 h-80">
+          <h2 class="ml-20 pt-20">
+            Introducing our innovative feature: a user-friendly search bar that allows you to effortlessly find hospitals and their policies. Upon entering a hospital name, key information—such as registration and treatment costs—will be clearly highlighted for easy reading. Each detail will be presented in a structured manner, ensuring you can quickly grasp essential points. For further information, direct links to the hospital's official website will be provided, offering a seamless way to access the most accurate and up-to-date details.
+          </h2>
         </div>
-        <div class="navbar-center hidden lg:flex">
-          <ul class="menu menu-horizontal px-1">
-            <li><a href="/hospitals.html">Hospitals</a></li>
-            <li><a href="/email.html">Email Filter</a></li>
-            <li><a href="/ngo.html">NGOs</a></li>
-            <li><a href="/stories.html">Stories that made us</a></li>
-
-          </ul>
-        </div>
-        <div class="navbar-end">
-        <a class="pr-8" href="/about.html">About Us</a>
-          <a class="btn">हिंदी</a>
+        <form class="w-1/2 h-20 flex justify-center items-center" action="">
+        <div class="w-1/2 h-20 flex justify-center items-center">
+          <label class="input mr-6 w-96 input-bordered flex items-center gap-2">
+            <input required type="text" class="grow" placeholder="Enter Your Hospital Name" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70">
+              <path
+                fill-rule="evenodd"
+                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                clip-rule="evenodd" />
+            </svg>
+          </label><select required class="select mr-6 w-40 max-w-xs">
+            <option disabled selected>Choose State</option>
+            <option>Andhra Pradesh</option>
+            <option>Arunachal Pradesh</option>
+            <option>Assam</option>
+            <option>Bihar</option>
+            <option>Chhattisgarh</option>
+            <option>Goa</option>
+            <option>Gujarat</option>
+            <option>Haryana</option>
+            <option>Himachal Pradesh</option>
+            <option>Jharkhand</option>
+            <option>Karnataka</option>
+            <option>Kerala</option>
+            <option>Madhya Pradesh</option>
+            <option>Maharashtra</option>
+            <option>Manipur</option>
+            <option>Meghalaya</option>
+            <option>Mizoram</option>
+            <option>Nagaland</option>
+            <option>Odisha</option>
+            <option>Punjab</option>
+            <option>Rajasthan</option>
+            <option>Sikkim</option>
+            <option>Tamil Nadu</option>
+            <option>Telangana</option>
+            <option>Tripura</option>
+            <option>Uttar Pradesh</option>
+            <option>Uttarakhand</option>
+            <option>West Bengal</option>
+            <option>Andaman and Nicobar Islands</option>
+            <option>Chandigarh</option>
+            <option>Dadra and Nagar Haveli and Daman and Diu</option>
+            <option>Lakshadweep</option>
+            <option>Delhi (National Capital Territory of Delhi)</option>
+            <option>Puducherry</option>
+            <option>Jammu and Kashmir</option>
+            <option>Ladakh</option>
+          </select>
+          <div><input class="btn btn-outline btn-success" id="submit" type="submit" value="Search"></div>
         </div>
       </div>
-      <label class="input w-1/3 input-bordered flex  items-center gap-2 items-end ml-auto mt-40 mr-20">
-        <input type="text" class="grow" placeholder="Enter Your Hospital Name" />
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 16 16"
-          fill="currentColor"
-          class="h-4 w-4 opacity-70">
-          <path
-            fill-rule="evenodd"
-            d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-            clip-rule="evenodd" />
-        </svg>
-      </label>
+    </form>
 </body>
 </html>
