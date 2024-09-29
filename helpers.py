@@ -3,7 +3,7 @@ import requests
 from io import BytesIO
 import pdfplumber
 import replicate
-from creds import REPLICATE_API_TOKEN3
+from creds import REPLICATE_API_TOKEN4
 import re
 
 def GetPolicy(name_of_company):                    
@@ -39,28 +39,31 @@ def read_data():
     else:
         return clean_data
 
-def GPTQuestions():
-    client = replicate.Client(api_token=REPLICATE_API_TOKEN3)            
-    context_info = str(read_data())
-
-    prompt = "i am 75M from a very wealthy family suggest me 3 health plans from the context and my per month approx investments. tell me the name of the plans too"
+def GPTQuestions(question):
+    client = replicate.Client(api_token=REPLICATE_API_TOKEN4)                
 
     # Prepare the input dictionary
-    input = {
+    input={
+        "top_k": 0,
         "top_p": 0.9,
-        "prompt": prompt,
+        "prompt": "ONM - (Intra Operative Neuro Monitoring)\n",
+        "max_tokens": 512,
         "min_tokens": 0,
         "temperature": 0.6,
-        "prompt_template": f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nYou are a helpful assistant.\n\n'{context_info}'\n\n<|start_header_id|>user<|end_header_id|>\n\n{{prompt}}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
-        "presence_penalty": 1.15
-    }    
+        "system_prompt": "You are a medical policy reader expert. your friend has a doubt from the following string. help him out in 60 words. the string could be a keyword or an extract from the policy",
+        "length_penalty": 1,
+        "stop_sequences": "<|end_of_text|>,<|eot_id|>",
+        "prompt_template": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nYou are a medical policy reader expert. your friend has a doubt from the following string. help him out in 60 words. the string could be a keyword or an extract from the policy<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n{prompt}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+        "presence_penalty": 1.15,
+        "log_performance_metrics": False
+    } 
     for event in client.stream(
         "meta/meta-llama-3-70b-instruct",
         input=input
     ):
-        print(event, end="")
+        print(str(event), end="")
     
 
 #print(len(read_data()))
-#GPTQuestions()
-print(GetPolicy("tata aig medicare"))
+GPTQuestions('we')
+#print(GetPolicy("tata aig medicare"))

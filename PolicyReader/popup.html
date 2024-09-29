@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selected Text</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #121212;
+        /* Dark background */
+        color: #e0e0e0;
+        /* Light text */
+        width: 200px;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 16px;
+        color: #bb86fc;
+        /* Purple accent for the heading */
+    }
+
+    #output {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #bb86fc;
+        /* Purple accent for selected text output */
+    }
+
+    button {
+        background-color: #bb86fc;
+        /* Purple background for button */
+        color: #121212;
+        /* Dark text on button */
+        border: none;
+        padding: 10px;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #9c65db;
+        /* Darker purple on hover */
+    }
+</style>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>LLM Output</title>
+    <style>
+        body {
+            width: 300px;
+            padding: 10px;
+        }
+
+        #output {
+            margin-bottom: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            min-height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>LLM Output</h2>
+    <div id="output"></div>
+    <button id="getTextButton">Get LLM Output</button>
+    <script src="popup.js"></script>
+</body>
+
+</html>
+
+</html>

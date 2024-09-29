@@ -1,0 +1,30 @@
+{
+    "manifest_version": 3,
+    "name": "LLM Output Chrome Extension",
+    "version": "1.0",
+    "description": "Get LLM output based on selected text from a webpage and show it in a popup",
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+      }
+    },
+    "permissions": [
+      "activeTab",
+      "scripting",
+      "storage"
+    ],
+    "host_permissions": [
+      "https://api.replicate.com/*"
+    ],
+    "icons": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    },
+    "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self'; connect-src https://api.replicate.com;"
+    }
+  }
