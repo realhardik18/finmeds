@@ -39,6 +39,10 @@ def ngo():
 def policy():
     return render_template('policy.html')
 
+@app.route('/about-us')
+def about():
+    return render_template('about-us.html')
+
 def GetTextFromPolicy(link_to_policy, page):
     response = requests.get(link_to_policy)
     with BytesIO(response.content) as policy:

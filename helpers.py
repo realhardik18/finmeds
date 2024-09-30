@@ -59,7 +59,7 @@ def get_llm_output(prompt):
     headers = {
         "accept": "application/json",
         "content-type": "application/json",
-        "authorization": "Bearer TOKEN"
+        "authorization": "Bearer d64fa560a12a4ad9cfa423a368cda858d86c403c6ffc6a4cff31457bbc225fe9"
     }
 
     try:
@@ -81,7 +81,7 @@ def get_llm_output(prompt):
         print(f"Error: {e}")
         return f"An error occurred while processing the request: {str(e)}"
 
-
+    
 
 
 
