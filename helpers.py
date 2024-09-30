@@ -2,8 +2,9 @@ from creds import SERP_API_KEY_1
 import requests
 from io import BytesIO
 import pdfplumber
-import replicate
-from creds import REPLICATE_API_TOKEN4
+import requests
+from creds import TOGETHER_AI_TOKEN
+import json
 import re
 
 def GetPolicy(hospital_name,city):
@@ -20,52 +21,73 @@ def GetPolicy(hospital_name,city):
     return response['organic_results'][0]['link']
 
 #https://narayanahealth.insurance/wp-content/uploads/2024/06/Narayana-Aditi-Prospectus.pdf
-def GetTextFromPolicy(link_to_policy):
-    text_corpus=''
-    response=requests.get(link_to_policy)
+def GetTextFromPolicy(link_to_policy, page):
+    response = requests.get(link_to_policy)
     with BytesIO(response.content) as policy:
         with pdfplumber.open(policy) as pdf:
-            for page in pdf.pages:
-                text=page.extract_text()
-                text_corpus+=text
-    with open('text.txt','w+') as file:
-        file.write(text_corpus)
-    return text_corpus
+            try:
+                # Extract text from the specific page
+                page_text = pdf.pages[page - 1].extract_text()  # Page numbers are 0-indexed
+            except IndexError:
+                return "Page number out of range."
 
-def read_data():
-    with open("text.txt",'r') as file:
-        data=file.read().strip()
-    clean_data = re.sub(r'[^a-zA-Z0-9\s]', '', data)
-    if len(clean_data)>32000:
-        return clean_data[0:32000]
+    # Clean the extracted text
+    clean_data = re.sub(r'[^a-zA-Z0-9\s]', '', page_text)
+    
+    if len(clean_data) > 32000:
+        return clean_data[:32000]
     else:
         return clean_data
 
-def GPTQuestions(question):
-    client = replicate.Client(api_token=REPLICATE_API_TOKEN4)                
+def get_llm_output(prompt):
+    # Input payload for the API
+    input_payload = {
+        "messages": [
+            {
+                "role": "system",
+                "content": "You are an expert medical policy reader who has to summarize the given text in 100 words."
+            },
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        "model": "mistralai/Mixtral-8x7B-Instruct-v0.1"
+    }
 
-    # Prepare the input dictionary
-    input={
-        "top_k": 0,
-        "top_p": 0.9,
-        "prompt": "ONM - (Intra Operative Neuro Monitoring)\n",
-        "max_tokens": 512,
-        "min_tokens": 0,
-        "temperature": 0.6,
-        "system_prompt": "You are a medical policy reader expert. your friend has a doubt from the following string. help him out in 60 words. the string could be a keyword or an extract from the policy",
-        "length_penalty": 1,
-        "stop_sequences": "<|end_of_text|>,<|eot_id|>",
-        "prompt_template": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nYou are a medical policy reader expert. your friend has a doubt from the following string. help him out in 60 words. the string could be a keyword or an extract from the policy<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n{prompt}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
-        "presence_penalty": 1.15,
-        "log_performance_metrics": False
-    } 
-    for event in client.stream(
-        "meta/meta-llama-3-70b-instruct",
-        input=input
-    ):
-        print(str(event), end="")
+    # API request
+    headers = {
+        "accept": "application/json",
+        "content-type": "application/json",
+        "authorization": "Bearer TOKEN"
+    }
+
+    try:
+        response = requests.post('https://api.together.xyz/v1/chat/completions', 
+                                 headers=headers, 
+                                 data=json.dumps(input_payload))
+
+        if response.status_code != 200:
+            # Handle API error
+            error_data = response.json()
+            print(f"API Error: {error_data}")
+            raise Exception(f"HTTP error! status: {response.status_code}, message: {error_data}")
+
+        # Extracting the response content
+        data = response.json()
+        return data['choices'][0]['message']['content']  # Adjust this according to actual API response structure
     
+    except Exception as e:
+        print(f"Error: {e}")
+        return f"An error occurred while processing the request: {str(e)}"
 
+
+
+
+
+   
+
+#print(GetTextFromPolicy('https://narayanahealth.insurance/wp-content/uploads/2024/06/Narayana-Aditi-Prospectus.pdf'))
 #print(len(read_data()))
 #GPTQuestions('we')
 #print(GetPolicy("tata aig medicare delhi"))

@@ -46,7 +46,7 @@ async function getLLMOutput(prompt) {
             headers: {
                 'accept': 'application/json',
                 'content-type': 'application/json',
-                'authorization': 'Bearer API_KEY'
+                'authorization': 'Bearer d64fa560a12a4ad9cfa423a368cda858d86c403c6ffc6a4cff31457bbc225fe9'
             },
             body: JSON.stringify(input),
         });

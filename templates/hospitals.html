@@ -4,8 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hospitals</title>
-  <link rel="shortcut icon" href="website_logo.png">
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,128 +12,68 @@
     href="https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet">
   <style>
-    .poppins-thin {
-      font-family: "Poppins", sans-serif;
-      font-weight: 100;
-      font-style: normal;
-    }
-
-    .poppins-extralight {
-      font-family: "Poppins", sans-serif;
-      font-weight: 200;
-      font-style: normal;
-    }
-
-    .poppins-light {
-      font-family: "Poppins", sans-serif;
-      font-weight: 300;
-      font-style: normal;
-    }
-
-    .poppins-regular {
-      font-family: "Poppins", sans-serif;
-      font-weight: 400;
-      font-style: normal;
-    }
-
-    .poppins-medium {
-      font-family: "Poppins", sans-serif;
-      font-weight: 500;
-      font-style: normal;
-    }
-
-    .poppins-semibold {
-      font-family: "Poppins", sans-serif;
-      font-weight: 600;
-      font-style: normal;
-    }
-
     .poppins-bold {
       font-family: "Poppins", sans-serif;
       font-weight: 700;
       font-style: normal;
     }
 
-    .poppins-extrabold {
-      font-family: "Poppins", sans-serif;
-      font-weight: 800;
-      font-style: normal;
-    }
-
-    .poppins-black {
-      font-family: "Poppins", sans-serif;
-      font-weight: 900;
-      font-style: normal;
-    }
-
-    .poppins-thin-italic {
-      font-family: "Poppins", sans-serif;
-      font-weight: 100;
-      font-style: italic;
-    }
-
-    .poppins-extralight-italic {
-      font-family: "Poppins", sans-serif;
-      font-weight: 200;
-      font-style: italic;
-    }
-
-    .poppins-light-italic {
-      font-family: "Poppins", sans-serif;
-      font-weight: 300;
-      font-style: italic;
-    }
-
-    .poppins-regular-italic {
-      font-family: "Poppins", sans-serif;
-      font-weight: 400;
-      font-style: italic;
-    }
-
-    .poppins-medium-italic {
-      font-family: "Poppins", sans-serif;
-      font-weight: 500;
-      font-style: italic;
-    }
-
-    .poppins-semibold-italic {
-      font-family: "Poppins", sans-serif;
-      font-weight: 600;
-      font-style: italic;
-    }
-
-    .poppins-bold-italic {
-      font-family: "Poppins", sans-serif;
-      font-weight: 700;
-      font-style: italic;
-    }
-
-    .poppins-extrabold-italic {
-      font-family: "Poppins", sans-serif;
-      font-weight: 800;
-      font-style: italic;
-    }
-
-    .poppins-black-italic {
-      font-family: "Poppins", sans-serif;
-      font-weight: 900;
-      font-style: italic;
-    }
-
     .background {
       background-size: cover;
       background-position: center;
-      background-repeat: no-repe at;
+      background-repeat: no-repeat;
     }
 
     .damn {
       place-items: center;
     }
+
+    /* Loading screen style */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .loading-overlay.active {
+      display: flex;
+    }
   </style>
+
+  <script>
+    function showLoadingScreen() {
+      // Show the loading screen when the form is submitted
+      document.getElementById('loading-overlay').classList.add('active');
+    }
+  </script>
 </head>
 
-<body class="bg-black text-white flex justify-center h-screen bg-animated background "
-  background="static/wave-haikei.svg">
+<body class="bg-black text-white flex justify-center h-screen bg-animated background ">
+
+  <!-- Loading screen overlay -->
+  <div id="loading-overlay" class="loading-overlay">
+    <div>
+      <h1 class="text-white text-3xl">Loading...</h1>
+      <div class="mt-4 flex justify-center">
+        <!-- You can add a loading spinner here if needed -->
+        <svg class="animate-spin h-12 w-12 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+          viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291l-2.833 1.528A9.964 9.964 0 004 12H0c0 3.042 1.135 5.824 3 7.938L6 17.29z">
+          </path>
+        </svg>
+      </div>
+    </div>
+  </div>
+
   <div class="w-screen block h-12 bg-black">
     <div class="navbar bg-black border-white border-b-2 w-screen">
       <div class="navbar-start w-48">
@@ -152,7 +90,7 @@
             <li><a href="/ngo.html">NGOs</a></li>
             <li><a href="/stories.html">Stories that made us</a></li>
             <li><a href="/about.html">About Us</a></li>
-            <li><a href="bscknwldge.html">Basic Knowledge</a></li>
+            <li><a href="vaccinations.html">Vaccinations</a></li>
           </ul>
         </div>
         <a class="btn btn-ghost text-xl poppins-bold" href="index.html"><img class="h-10" src="static/logo black bg.png"
@@ -160,15 +98,15 @@
       </div>
       <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal px-1">
-          <li><a href="/hospitals.html">Hospitals</a></li>
-          <li><a href="/policy.html">Policy Reader</a></li>
-          <li><a href="/ngo.html">NGOs</a></li>
-          <li><a href="/stories.html">Stories that made us</a></li>
-          <li><a href="bscknwldge.html">Basic Knowledge</a></li>
+          <li><a href="/hospitals">Hospitals</a></li>
+          <li><a href="/policy">Policy Reader</a></li>
+          <li><a href="/ngo">NGOs</a></li>
+          <li><a href="/stories">Stories that made us</a></li>
+          <li><a href="/vaccinations">Vaccinations</a></li>
         </ul>
       </div>
       <div class="navbar-end">
-        <a class="pr-8" href="/about.html">About Us</a>
+        <a class="pr-8" href="/about">About Us</a>
         <a class="btn">हिंदी</a>
       </div>
     </div>
@@ -183,16 +121,18 @@
           official website will be provided, offering a seamless way to access the most accurate and up-to-date details.
         </h2>
       </div>
-      <form class="w-1/2 h-20 flex justify-center items-center" action="">
+      <form class="w-1/2 h-20 flex justify-center items-center" action="/results" method="POST"
+        onsubmit="showLoadingScreen()">
         <div class="w-1/2 h-20 flex justify-center items-center">
           <label class="input mr-6 w-96 input-bordered flex items-center gap-2">
-            <input required type="text" class="grow" placeholder="Enter Your Hospital Name" />
+            <input required type="text" name="hospital" class="grow" placeholder="Enter Your Hospital Name" />
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70">
               <path fill-rule="evenodd"
                 d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
                 clip-rule="evenodd" />
             </svg>
-          </label><select required class="select mr-6 w-40 max-w-xs">
+          </label>
+          <select required class="select mr-6 w-40 max-w-xs" name="state">
             <option disabled selected>Choose State</option>
             <option>Andhra Pradesh</option>
             <option>Arunachal Pradesh</option>
@@ -235,6 +175,7 @@
         </div>
     </div>
     </form>
+  </div>
 </body>
 
 </html>

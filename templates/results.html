@@ -14,9 +14,32 @@
         <h1 class="text-4xl poppins-bold">Results</h1>
         <p class="text-xl mt-5">You searched for hospital: <strong>{{ hospital }}</strong></p>
         <p class="text-xl mt-2">State: <strong>{{ state }}</strong></p>
-        <p class="text-xl mt-2">{{ link }}</p>
+        <p class="text-xl mt-2" id="pdfLink">{{ link }}</p> <!-- This will be your PDF link -->
+
+        <!-- Input box for entering the page number -->
+        <div class="mt-5">
+            <input id="pageInput" type="number" placeholder="Enter page number"
+                class="input input-bordered w-full max-w-xs">
+            <button onclick="fetchPageText()" class="btn btn-outline btn-success mt-3">Get Page Text</button>
+        </div>
+
+        <!-- Container to display the page text -->
+        <div id="pageText" class="mt-5 text-lg"></div>
+
         <a href="/hospitals" class="btn btn-outline btn-success mt-5">Search Again</a>
     </div>
+
+    <script>
+        async function fetchPageText() {
+            const page = document.getElementById('pageInput').value;
+            const link = document.getElementById('pdfLink').innerText; // Get the link displayed on the site
+
+            // Send page and link as parameters to the backend
+            const response = await fetch(`/get_pdf_page_text?page=${page}&link=${encodeURIComponent(link)}`);
+            const data = await response.text();
+            document.getElementById('pageText').innerText = data;
+        }
+    </script>
 </body>
 
 </html>
