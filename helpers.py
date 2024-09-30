@@ -6,11 +6,13 @@ import replicate
 from creds import REPLICATE_API_TOKEN4
 import re
 
-def GetPolicy(name_of_company):                    
+def GetPolicy(hospital_name,city):
+    hospital_name=hospital_name.replace('+','')                    
+    city=city.replace('+','')                    
     params = {
     "api_key": SERP_API_KEY_1,
     "engine": "google",
-    "q": f"health+insurance+policy+{name_of_company}+filetype%3Apdf",
+    "q": f"health+insurance+policy+{hospital_name}+{city}+filetype%3Apdf",
     "location": "India",
     }    
     URL=f"https://serpapi.com/search.json?engine=google&q={params['q']}&location={params['location']}&google_domain=google.com&gl=us&hl=en&api_key={params['api_key']}"
@@ -65,5 +67,6 @@ def GPTQuestions(question):
     
 
 #print(len(read_data()))
-GPTQuestions('we')
-#print(GetPolicy("tata aig medicare"))
+#GPTQuestions('we')
+#print(GetPolicy("tata aig medicare delhi"))
+#print(GetPolicy('max life','karnataka'))

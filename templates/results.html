@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-black text-white flex justify-center h-screen bg-animated background">
+    <div class="text-center mt-20">
+        <h1 class="text-4xl poppins-bold">Results</h1>
+        <p class="text-xl mt-5">You searched for hospital: <strong>{{ hospital }}</strong></p>
+        <p class="text-xl mt-2">State: <strong>{{ state }}</strong></p>
+        <p class="text-xl mt-2">{{ link }}</p>
+        <a href="/hospitals" class="btn btn-outline btn-success mt-5">Search Again</a>
+    </div>
+</body>
+
+</html>
